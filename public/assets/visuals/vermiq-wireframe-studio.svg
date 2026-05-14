@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Vermiq wireframe studio</title>
+  <desc id="desc">A custom isometric 3D production workspace illustration.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121722"/>
+      <stop offset="0.58" stop-color="#26312d"/>
+      <stop offset="1" stop-color="#0f1217"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0d7a7" stop-opacity="0.92"/>
+      <stop offset="1" stop-color="#2ac7b8" stop-opacity="0.56"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+  <rect width="960" height="720" rx="34" fill="url(#bg)"/>
+  <g opacity="0.22" stroke="#f8e3b4" stroke-width="1">
+    <path d="M80 555h800M80 500h800M80 445h800M80 390h800M80 335h800M80 280h800M80 225h800"/>
+    <path d="M148 160v448M220 160v448M292 160v448M364 160v448M436 160v448M508 160v448M580 160v448M652 160v448M724 160v448M796 160v448"/>
+  </g>
+  <g filter="url(#softShadow)">
+    <path d="M192 451 463 292l303 171-273 159Z" fill="#131920"/>
+    <path d="M192 451 463 292v-95L192 357Z" fill="#202b36"/>
+    <path d="M463 292 766 463v-95L463 197Z" fill="#27323a"/>
+    <path d="M192 357 463 197l303 171-273 159Z" fill="#334040"/>
+  </g>
+  <g fill="none" stroke="url(#glass)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M280 372 459 270l201 114-181 105Z"/>
+    <path d="M280 372v-118l179-102 201 114v118"/>
+    <path d="M459 270V152"/>
+    <path d="M280 254 479 369l181-103"/>
+    <path d="M355 414V302l84-48 95 54v112l-86 50Z"/>
+    <path d="M535 421V309"/>
+    <path d="M355 302l95 56 84-50"/>
+  </g>
+  <g>
+    <rect x="631" y="112" width="188" height="126" rx="14" fill="#f7e0af" opacity="0.92"/>
+    <path d="M656 196h138M656 169h104M656 142h72" stroke="#182027" stroke-width="10" stroke-linecap="round" opacity="0.78"/>
+    <rect x="136" y="127" width="208" height="118" rx="16" fill="#2ac7b8" opacity="0.88"/>
+    <path d="M164 205h144M164 176h110M164 148h64" stroke="#11202a" stroke-width="10" stroke-linecap="round" opacity="0.68"/>
+  </g>
+  <g fill="#e35445">
+    <rect x="665" y="528" width="72" height="18" rx="9"/>
+    <rect x="743" y="528" width="38" height="18" rx="9"/>
+    <rect x="615" y="557" width="166" height="18" rx="9" opacity="0.76"/>
+  </g>
+</svg>

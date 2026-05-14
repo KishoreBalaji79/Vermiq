@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Vermiq motion board</title>
+  <desc id="desc">A custom storyboard and 3D animation timeline illustration.</desc>
+  <defs>
+    <linearGradient id="boardBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1217"/>
+      <stop offset="0.55" stop-color="#1c2525"/>
+      <stop offset="1" stop-color="#2f2520"/>
+    </linearGradient>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e35445"/>
+      <stop offset="1" stop-color="#f0d7a7"/>
+    </linearGradient>
+    <linearGradient id="cool" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2ac7b8"/>
+      <stop offset="1" stop-color="#7b6cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" rx="34" fill="url(#boardBg)"/>
+  <g fill="#ffffff" opacity="0.05">
+    <rect x="80" y="72" width="800" height="2"/>
+    <rect x="80" y="164" width="800" height="2"/>
+    <rect x="80" y="256" width="800" height="2"/>
+    <rect x="80" y="348" width="800" height="2"/>
+    <rect x="80" y="440" width="800" height="2"/>
+    <rect x="80" y="532" width="800" height="2"/>
+    <rect x="80" y="624" width="800" height="2"/>
+  </g>
+  <g transform="translate(120 112)">
+    <rect width="276" height="198" rx="22" fill="#f4ede2"/>
+    <path d="M56 141 138 56l88 118" fill="none" stroke="#121722" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M82 142h112" stroke="#e35445" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(442 112)">
+    <rect width="276" height="198" rx="22" fill="#17212a"/>
+    <path d="M64 132 138 58l78 74-78 45Z" fill="none" stroke="url(#cool)" stroke-width="12" stroke-linejoin="round"/>
+    <path d="M138 58v119M64 132l74 45M216 132l-78 45" stroke="#f0d7a7" stroke-width="7" stroke-linecap="round" opacity="0.75"/>
+  </g>
+  <g transform="translate(186 358)">
+    <rect width="588" height="186" rx="24" fill="#101820"/>
+    <path d="M56 94h476" stroke="#263848" stroke-width="10" stroke-linecap="round"/>
+    <path d="M56 94h214" stroke="url(#hot)" stroke-width="10" stroke-linecap="round"/>
+    <rect x="88" y="58" width="54" height="72" rx="10" fill="#2ac7b8"/>
+    <rect x="228" y="38" width="54" height="112" rx="10" fill="#f0d7a7"/>
+    <rect x="390" y="68" width="54" height="52" rx="10" fill="#e35445"/>
+    <path d="M94 150h342" stroke="#f4ede2" stroke-width="8" stroke-linecap="round" opacity="0.18"/>
+  </g>
+  <path d="M716 237c50 56 72 122 54 198" fill="none" stroke="#f0d7a7" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 20" opacity="0.78"/>
+  <path d="m765 421-31-12 22 26Z" fill="#f0d7a7"/>
+</svg>
