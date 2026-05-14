@@ -14,6 +14,7 @@ await mkdir(path.join(dist, "assets"), { recursive: true });
 await copyFile(path.join(root, "src", "styles", "main.css"), path.join(dist, "assets", "styles.css"));
 await copyFile(path.join(root, "src", "scripts", "main.js"), path.join(dist, "assets", "client.js"));
 await cp(path.join(root, "public"), dist, { recursive: true });
+await writeFile(path.join(dist, ".nojekyll"), "", "utf8");
 
 for (const page of getAllPages()) {
   const outputPath = page.slug === ""

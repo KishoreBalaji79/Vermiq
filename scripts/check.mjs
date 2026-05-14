@@ -5,6 +5,11 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
 const dist = path.join(root, "dist");
+const normalizeBasePath = (value = "") => {
+  const cleaned = String(value).trim().replace(/^\/+|\/+$/g, "");
+  return cleaned ? `/${cleaned}` : "";
+};
+const basePath = normalizeBasePath(process.env.BASE_PATH);
 
 const pages = [];
 
@@ -34,13 +39,17 @@ for (const file of pages) {
     const url = match[1];
     if (!url.startsWith("/") || url.startsWith("//")) continue;
 
-    if (url.startsWith("/assets")) {
-      if (!existsSync(path.join(dist, url))) missing.push({ file, url });
+    const localUrl = basePath && url.startsWith(`${basePath}/`)
+      ? url.slice(basePath.length)
+      : url;
+
+    if (localUrl.startsWith("/assets")) {
+      if (!existsSync(path.join(dist, localUrl))) missing.push({ file, url });
       continue;
     }
 
-    const routeFile = path.join(dist, url, "index.html");
-    const directFile = path.join(dist, url);
+    const routeFile = path.join(dist, localUrl, "index.html");
+    const directFile = path.join(dist, localUrl);
     if (!existsSync(routeFile) && !existsSync(directFile)) {
       missing.push({ file, url });
     }

@@ -36,6 +36,18 @@ npm run serve   # serve existing dist/
 npm run dev     # build and serve locally
 ```
 
+## GitHub Pages
+
+Deployment is handled by `.github/workflows/deploy-pages.yml`. On every push to `main`, GitHub Actions builds `dist/`, checks generated routes/assets, uploads the Pages artifact, and deploys it.
+
+Because this repository is published under `/Vermiq`, the workflow builds with:
+
+```bash
+BASE_PATH=/Vermiq npm run build
+```
+
+For local development, keep using `npm run dev`; it builds without a base path.
+
 ## Edit
 
 - Main content, service pages, blog pages, navigation, and asset URLs live in `src/data/site-data.mjs`.

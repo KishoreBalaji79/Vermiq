@@ -8,7 +8,17 @@ const esc = (value = "") =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-const href = (slug = "") => slug === "" ? "/" : `/${slug}/`;
+const normalizeBasePath = (value = "") => {
+  const cleaned = String(value).trim().replace(/^\/+|\/+$/g, "");
+  return cleaned ? `/${cleaned}` : "";
+};
+
+const basePath = normalizeBasePath(process.env.BASE_PATH);
+const href = (slug = "") => `${basePath}/${slug ? `${slug}/` : ""}`;
+const media = (value = "") => {
+  const src = String(value);
+  return src.startsWith("/") && !src.startsWith("//") ? `${basePath}${src}` : src;
+};
 
 const buttonIcon = (label = "arrow") =>
   `<span class="btn-icon ${label === "play" ? "is-play" : "is-arrow"}" aria-hidden="true"></span>`;
@@ -18,13 +28,13 @@ function motionStage(label = "vermiq motion asset") {
     <div class="motion-stage" data-depth-scene aria-label="${esc(label)}">
       <div class="stage-grid"></div>
       <div class="stage-card stage-card-a" data-depth="10">
-        <img src="${esc(site.assets.wireframe)}" alt="Wireframe 3D studio asset">
+        <img src="${esc(media(site.assets.wireframe))}" alt="Wireframe 3D studio asset">
       </div>
       <div class="stage-card stage-card-b" data-depth="18">
-        <img src="${esc(site.assets.motionBoard)}" alt="3D animation timeline asset">
+        <img src="${esc(media(site.assets.motionBoard))}" alt="3D animation timeline asset">
       </div>
       <div class="stage-card stage-card-c" data-depth="26">
-        <img src="${esc(site.assets.materialLab)}" alt="3D material lab asset">
+        <img src="${esc(media(site.assets.materialLab))}" alt="3D material lab asset">
       </div>
       <div class="stage-rail stage-rail-one"></div>
       <div class="stage-rail stage-rail-two"></div>
@@ -142,7 +152,7 @@ function logoStrip() {
 }
 
 function hero(page, options = {}) {
-  const image = page.image || site.assets.hero;
+  const image = media(page.image || site.assets.hero);
   const tall = options.tall ? " hero-tall" : "";
   return `
     <section class="hero${tall}" style="--hero-image: url('${esc(image)}')">
@@ -234,7 +244,7 @@ function architectureSuiteSection() {
       <div class="architecture-grid">
         ${site.architectureFeatures.map((item) => `
           <a class="architecture-card" href="${href(item.slug)}" data-tilt>
-            <img src="${esc(item.image)}" alt="${esc(item.title)}">
+            <img src="${esc(media(item.image))}" alt="${esc(item.title)}">
             <div>
               <span>CGI module</span>
               <h3>${esc(item.title)}</h3>
@@ -267,7 +277,7 @@ function servicesShowcase() {
             <div class="mini-service-list">
               ${group.links.slice(0, 6).map(([title, slug]) => `<a href="${href(slug)}">${esc(title)}</a>`).join("")}
             </div>
-            <img src="${esc(group.image)}" alt="${esc(group.title)} visual" loading="lazy">
+            <img src="${esc(media(group.image))}" alt="${esc(group.title)} visual" loading="lazy">
           </article>
         `).join("")}
       </div>
@@ -284,7 +294,7 @@ function worksGrid(limit = workCategories.length) {
     <div class="work-grid" data-filter-grid>
       ${workCategories.slice(0, limit).map((item) => `
         <article class="work-card" data-filter-card="${esc(item.title)}" data-tilt>
-          <img src="${esc(item.image)}" alt="${esc(item.title)} 3D work" loading="lazy">
+          <img src="${esc(media(item.image))}" alt="${esc(item.title)} 3D work" loading="lazy">
           <div>
             <p class="eyebrow">${esc(item.title)}</p>
             <h3>${esc(item.items[0])}</h3>
@@ -315,7 +325,7 @@ function blogCards(limit = blogs.length) {
     <div class="blog-grid" data-blog-grid>
       ${blogs.slice(0, limit).map((blog) => `
         <article class="blog-card" data-blog-card data-category="${esc(blog.category)}" data-title="${esc(blog.title.toLowerCase())}" data-tilt>
-          <img src="${esc(blog.image)}" alt="${esc(blog.title)}" loading="lazy">
+          <img src="${esc(media(blog.image))}" alt="${esc(blog.title)}" loading="lazy">
           <div>
             <span>${esc(blog.category)}</span>
             <h3>${esc(blog.title)}</h3>
@@ -465,7 +475,7 @@ function renderHome(page) {
     </section>
     ${proofGrid()}
     <section class="section agency-band">
-      <img src="${esc(site.assets.materialLab)}" alt="Vermiq material and animation lab visual" loading="lazy">
+      <img src="${esc(media(site.assets.materialLab))}" alt="Vermiq material and animation lab visual" loading="lazy">
       <div>
         <p class="eyebrow">Motion-first production</p>
         <h2>Full-service creative production with a more distinctive visual signature</h2>
@@ -496,7 +506,7 @@ function renderCategory(page) {
       <div class="specialty-grid">
         ${group.links.map(([title, slug, image]) => `
           <a class="specialty-card" href="${href(slug)}" data-tilt>
-            <img src="${esc(image)}" alt="${esc(title)}" loading="lazy">
+            <img src="${esc(media(image))}" alt="${esc(title)}" loading="lazy">
             <span>${esc(title)}</span>
             <small>View service page</small>
           </a>
@@ -523,7 +533,7 @@ function relatedServices(page) {
       <div class="related-row">
         ${category.links.filter(([, slug]) => slug !== page.slug).slice(0, 4).map(([title, slug, image]) => `
           <a href="${href(slug)}">
-            <img src="${esc(image)}" alt="${esc(title)}" loading="lazy">
+            <img src="${esc(media(image))}" alt="${esc(title)}" loading="lazy">
             <span>${esc(title)}</span>
           </a>
         `).join("")}
@@ -542,7 +552,7 @@ function renderService(page) {
         <p>${esc(page.sections[0].text)}</p>
         <p>${esc(page.sections[1].text)}</p>
       </div>
-      <img src="${esc(page.image)}" alt="${esc(page.title)} detail" loading="lazy">
+      <img src="${esc(media(page.image))}" alt="${esc(page.title)} detail" loading="lazy">
     </section>
     ${page.eyebrow === "3D Animation" ? motionLabSection() : ""}
     ${/(Architectural|Architecture|Interior|Exterior|Structural|Walkthrough|Construction|Real Estate|House|Floor Plan)/i.test(page.title) ? architectureSuiteSection() : ""}
@@ -642,7 +652,7 @@ function renderCompany(page) {
         <div class="gallery-grid">
           ${[site.assets.studio, site.assets.render, site.assets.product, site.assets.animation, site.assets.xr, site.assets.interior].map((image, index) => `
             <figure>
-              <img src="${esc(image)}" alt="Studio gallery ${index + 1}" loading="lazy">
+              <img src="${esc(media(image))}" alt="Studio gallery ${index + 1}" loading="lazy">
               <figcaption>Studio moment ${index + 1}</figcaption>
             </figure>
           `).join("")}
@@ -727,8 +737,8 @@ export function renderPage(_, page) {
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">
     <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="stylesheet" href="/assets/styles.css">
-    <script type="module" src="/assets/client.js" defer></script>
+    <link rel="stylesheet" href="${esc(media("/assets/styles.css"))}">
+    <script type="module" src="${esc(media("/assets/client.js"))}" defer></script>
   </head>
   <body>
     ${header()}
